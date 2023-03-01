@@ -42,12 +42,17 @@ application_support_symlinks=(
 set -e
 
 install_brew() {
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew tap Homebrew/bundle
+    which -s brew
+    if [[ $? != 0 ]] ; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        brew tap Homebrew/bundle
+    fi
 }
 
 install_dependencies() {
+    brew update
     brew bundle --file ~/.dotfiles/src/${brewfile} --cleanup
+    brew upgrade
 }
 
 clone_repo() {
@@ -103,7 +108,8 @@ install_nerd_fonts() {
 }
 
 update_nvim_plugins() {
-    nvim --headless +Lazy update +qa
+    nvim --headless "+Lazy! sync" +qa
+    printf "\033[32m\nNvim plugins updated!\033[m\\n"
 }
 
 ## Start of the script
