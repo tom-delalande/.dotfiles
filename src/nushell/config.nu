@@ -663,3 +663,4 @@ alias vim = nvim
 alias gco = git checkout
 alias gs = git status
 alias gr = (git fetch upstream main | git rebase upstream/main | git push --force-with-lease)
+alias emulator = ~/Library/Android/sdk/tools/emulator -avd (~/Library/Android/sdk/tools/emulator -list-avds | head -n 1)
