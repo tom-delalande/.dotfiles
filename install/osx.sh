@@ -63,7 +63,7 @@ clone_repo() {
   if [ -d "${dotfiles_dir}" ]; then 
     cd ${dotfiles_dir} && git submodule update --init --recursive
     ## Change to ssh url
-    git remote set-url origin git@github.com:${repo_path}
+    # git remote set-url origin git@github.com:${repo_path}
   fi
 }
 
