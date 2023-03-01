@@ -45,7 +45,7 @@ local telescope_options = {
             preview_cutoff = 120,
         },
         file_ignore_patterns = { "node_modules" },
-        path_display = { "truncate" },
+        path_display = { "smart" },
         winblend = 0,
         border = {},
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
