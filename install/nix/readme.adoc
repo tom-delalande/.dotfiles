@@ -1,0 +1,11 @@
+
+[bash]
+'''
+nix-shell -s git
+git clone https://github.com/tom-delalande/.dotfiles.git ~/.dotfiles
+
+sudo rm /etc/nixos/configuration.nix
+ln -s ~/.dotfiles/install/nix/home/configuration.nix /etc/nixos/configuration.nix
+sudo nixos-rebuild switch
+
+'''
