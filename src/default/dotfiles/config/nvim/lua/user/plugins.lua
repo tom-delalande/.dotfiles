@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    "nvim-tree/nvim-web-devicons",
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -75,7 +74,6 @@ require("lazy").setup({
             })
         end
     },
-    "leafgarland/typescript-vim",
     {
         "https://github.com/apple/pkl-neovim",
         lazy = true,
@@ -132,8 +130,6 @@ require("lazy").setup({
         end,
 
     },
-    "jose-elias-alvarez/null-ls.nvim",
-    "RishabhRD/nvim-lsputils",
     {
         "windwp/nvim-autopairs",
         config = function()
@@ -141,55 +137,64 @@ require("lazy").setup({
         end
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            {
-                'williamboman/mason.nvim',
-                opts = {
-                    ensure_installed = {
-                        "js-debug-adapter",
-                    }
-                },
-            },
-            { 'williamboman/mason-lspconfig.nvim' },
-
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lua' },
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        },
+        "williamboman/mason.nvim",
         config = function()
-
+            require("mason").setup({})
         end
     },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local default_setup = function(server)
+                require('lspconfig')[server].setup({
+                    capabilities = lsp_capabilities,
+                })
+            end
+            require('mason-lspconfig').setup({
+                ensure_installed = {},
+                handlers = {
+                    default_setup,
+                },
+            })
+        end
+    },
+    { "neovim/nvim-lspconfig" },
+    {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            local cmp = require('cmp')
+            local cmp_select = { behavior = cmp.SelectBehavior.Select }
+            cmp.setup({
+                sources = {
+                    { name = 'nvim_lsp' },
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                }),
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
+                },
+            })
+        end
+    },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-path' },
+    { 'saadparwaiz1/cmp_luasnip' },
+    { 'hrsh7th/cmp-nvim-lua' },
+    { 'L3MON4D3/LuaSnip' },
     {
         "evanleck/vim-svelte",
         dependencies = {
             "othree/html5.vim",
             "pangloss/vim-javascript"
         }
-    },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            local null_ls = require("null-ls")
-
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.prettierd,
-                },
-            })
-        end,
     },
     { "simrat39/rust-tools.nvim" },
     {
