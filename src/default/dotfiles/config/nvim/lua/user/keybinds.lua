@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>e", ":Tex <CR>", {})
+vim.keymap.set("n", "<leader>e", ":Ex <CR>", {})
 vim.keymap.set("n", "<C-g>", ":LazyGit<CR>", {})
 vim.keymap.set("x", "gr", ":Gitsigns reset_hunk<CR>", {})
 

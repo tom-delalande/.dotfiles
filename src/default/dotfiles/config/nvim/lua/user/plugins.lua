@@ -189,6 +189,7 @@ require("lazy").setup({
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
     { 'L3MON4D3/LuaSnip' },
+    "leafgarland/typescript-vim",
     {
         "evanleck/vim-svelte",
         dependencies = {
