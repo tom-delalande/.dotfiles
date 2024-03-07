@@ -1,5 +1,4 @@
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", {})
-vim.keymap.set("n", "<leader>E", ":NvimTreeFindFile<CR>", {})
+vim.keymap.set("n", "<leader>e", ":Ex<CR>", {})
 vim.keymap.set("n", "<C-g>", ":LazyGit<CR>", {})
 vim.keymap.set("x", "gr", ":Gitsigns reset_hunk<CR>", {})
 
@@ -13,15 +12,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", {})
 vim.keymap.set("n", "n", "nzzzv", {})
 vim.keymap.set("n", "N", "Nzzzv", {})
 
--- Telescope
-vim.keymap.set("n", "<leader>fr", ":Telescope resume <CR>", {})
-vim.keymap.set("n", "<leader>ff", ":Telescope find_files <CR>", {})
-vim.keymap.set("n", "<leader>fw", ":Telescope live_grep <CR>", {})
-vim.keymap.set("n", "<leader>fa", ":Telescope find_files follow=true no_ignore=true hidden=true <CR>", {})
-vim.keymap.set("n", "<leader>fo", ":Telescope oldfiles <CR>", {})
-vim.keymap.set("n", "<leader>cm", ":Telescope git_commits <CR>", {})
-vim.keymap.set("n", "<leader>gt", ":Telescope git_status <CR>", {})
-vim.keymap.set("n", "<leader>xx", ":Telescope diagnostics <CR>", {})
+vim.keymap.set("n", "<leader>ff", ":Files<CR>", {})
+vim.keymap.set("n", "<leader>fw", ":RG <CR>", {})
 
 -- LSP
 vim.keymap.set("n", "<space>fd", vim.diagnostic.open_float, {})
@@ -35,10 +27,6 @@ vim.keymap.set("n", "<space>db", "<cmd> DapToggleBreakpoint <CR>", {})
 vim.keymap.set("n", "<space>dr", "<cmd> DapContinue <CR>", {})
 
 local lsp = function(_, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-    -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
@@ -53,7 +41,7 @@ local lsp = function(_, bufnr)
     end, bufopts)
     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "gr", ":Telescope lsp_references <CR>", bufopts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
     vim.keymap.set("n", "<space>fm", function()
         vim.lsp.buf.format { async = true }
     end, bufopts)

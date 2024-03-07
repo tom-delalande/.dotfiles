@@ -131,12 +131,6 @@ lspzero.set_preferences({
 lspzero.on_attach(keymaps)
 lspzero.setup()
 
-require("flutter-tools").setup {
-    lsp = {
-        on_attach = keymaps,
-    }
-}
-
 vim.diagnostic.config({
     virtual_text = true
 })
