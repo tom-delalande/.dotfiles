@@ -125,17 +125,22 @@ in
       i3
       docker
       docker-compose
-      git-crypt
   ];
 
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
 
   # List services that you want to enable:
 
@@ -167,8 +172,15 @@ in
   ## Home Manager
   home-manager.users.mable = {
     home.stateVersion = "23.11";
-    home.file.".config/nvim" = {
-      source = /home/mable/.dotfiles/src/default/dotfiles/config/nvim;
+    home.file.".config" = {
+      source = /home/mable/.dotfiles/src/default/dotfiles/config;
+      recursive = true;
+    };
+    home.file.".zshrc" = {
+      source = /home/mable/.dotfiles/src/default/dotfiles/zshrc;
+    };
+    home.file.".tmux/plugins/tpm" = {
+      source = /home/mable/.dotfiles/src/default/dotfiles/tmux-plugins;
       recursive = true;
     };
   };
