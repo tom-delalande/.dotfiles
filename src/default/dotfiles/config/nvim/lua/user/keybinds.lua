@@ -1,4 +1,6 @@
-vim.keymap.set("n", "<leader>e", ":Ex <CR>", {})
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle <CR>", {})
+vim.keymap.set("n", "<leader>E", ":NvimTreeToggle <CR>", {})
+vim.keymap.set("n", "<CR>", "<CR><Cmd>cclose<CR>", { buffer = false, noremap = true, silent = true })
 vim.keymap.set("n", "<C-g>", ":LazyGit<CR>", {})
 vim.keymap.set("x", "gr", ":Gitsigns reset_hunk<CR>", {})
 

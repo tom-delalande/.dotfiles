@@ -13,6 +13,23 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
+        config = function()
+            require("nvim-tree").setup({
+                view = {
+                    adaptive_size = true,
+                    float = {
+                        enable = true,
+                    },
+                },
+            })
+        end
+    },
+    "nvim-treesitter/nvim-treesitter-context",
+    {
         "catppuccin/nvim",
         name = "catppuccin",
         config = function()
