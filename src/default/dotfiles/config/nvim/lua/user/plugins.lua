@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    "sindrets/diffview.nvim",
     {
         "nvim-tree/nvim-tree.lua",
         dependencies = {
