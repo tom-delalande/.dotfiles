@@ -1,1 +1,1 @@
-/Users/thomas-delalande/.local/share/nvim/lazy/fzf/shell/key-bindings.fish
+/Users/regchain/.local/share/nvim/lazy/fzf/shell/key-bindings.fish
