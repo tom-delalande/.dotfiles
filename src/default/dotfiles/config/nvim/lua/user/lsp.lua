@@ -1,5 +1,9 @@
 vim.keymap.set("n", "<space>fd", vim.diagnostic.open_float, {})
-vim.keymap.set("n", "<space>fl", ":silent %!prettier --stdin-filepath %<CR>", {})
+vim.keymap.set("n", "<space>fl", function ()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    vim.cmd("silent %!prettier --stdin-filepath %")
+    vim.api.nvim_win_set_cursor(0, cursor)
+end, {})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
