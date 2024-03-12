@@ -1,9 +1,4 @@
 vim.keymap.set("n", "<space>fd", vim.diagnostic.open_float, {})
-vim.keymap.set("n", "<space>fl", function ()
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    vim.cmd("silent %!prettier --stdin-filepath %")
-    vim.api.nvim_win_set_cursor(0, cursor)
-end, {})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
@@ -18,9 +13,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
         vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "<space>fm", function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
+
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if client.name ~= 'tsserver' and client.name ~= 'eslint' and client.name ~= 'tailwindcss' then
+            print(client.name)
+            vim.keymap.set("n", "<space>fm", function()
+                vim.lsp.buf.format { async = true }
+            end, opts)
+        end
         vim.keymap.set("n", "<space>rn", function()
             vim.lsp.buf.rename()
         end, opts)
@@ -29,7 +29,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local lsp = require("lspconfig")
 
-lsp.tsserver.setup({})
+lsp.tsserver.setup({
+    on_attach = function()
+        vim.keymap.set("n", "<space>fm", function()
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            vim.cmd("silent %!prettier --stdin-filepath %")
+            vim.api.nvim_win_set_cursor(0, cursor)
+        end, {})
+    end
+})
 lsp.kotlin_language_server.setup({})
 lsp.terraformls.setup({})
 lsp.jsonls.setup({})
