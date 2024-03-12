@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client.name ~= 'tsserver' and client.name ~= 'eslint' and client.name ~= 'tailwindcss' then
-            print(client.name)
             vim.keymap.set("n", "<space>fm", function()
                 vim.lsp.buf.format { async = true }
             end, opts)
