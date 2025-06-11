@@ -3,7 +3,7 @@ return {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             'nvim-telescope/telescope-ui-select.nvim',
         },
         config = function()
@@ -21,14 +21,14 @@ return {
                     builtin = { theme = default_theme },
                 },
                 extensions = {
-                    fzf = {},
+                    -- fzf = {},
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown {}
                     },
                 },
             })
 
-            require('telescope').load_extension('fzf')
+            -- require('telescope').load_extension('fzf')
             require("telescope").load_extension("ui-select")
 
             vim.keymap.set("n", "<leader>fr", require('telescope.builtin').resume, {})
