@@ -50,14 +50,14 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = "LSP Actions",
                 callback = function(event)
-                    local telescope = require('telescope.builtin')
+                    -- local telescope = require('telescope.builtin')
                     local opts = { buffer = event.buf }
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-                        { noremap = true, silent = true })
-                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
+                    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition,
+                    --     { noremap = true, silent = true })
+                    -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    -- vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
                     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
@@ -65,11 +65,11 @@ return {
                         vim.keymap.set("n", "<space>fd", vim.diagnostic.open_float, {})
                         vim.lsp.buf.format { async = true }
                     end, opts)
-                    vim.keymap.set("n", "gi", telescope.lsp_implementations, opts)
-                    vim.keymap.set("n", "<space>D", telescope.lsp_type_definitions, opts)
-                    vim.keymap.set("n", "gr", function()
-                        telescope.lsp_references({ include_declaration = false })
-                    end, opts)
+                    -- vim.keymap.set("n", "gi", telescope.lsp_implementations, opts)
+                    -- vim.keymap.set("n", "<space>D", telescope.lsp_type_definitions, opts)
+                    -- vim.keymap.set("n", "gr", function()
+                    --     telescope.lsp_references({ include_declaration = false })
+                    -- end, opts)
                     vim.keymap.set("n", "<space>rn", function()
                         vim.lsp.buf.rename()
                     end, opts)
