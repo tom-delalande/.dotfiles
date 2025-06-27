@@ -34,6 +34,10 @@ return {
                 capabilities = capabilities,
             })
 
+            lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+
             configs.kotlin_lsp = {
                 default_config = {
                     cmd = { "/Users/thomas-delalande/dev/personal/kotlin-0.252.16998/kotlin-lsp.sh", "--stdio" },
@@ -82,7 +86,7 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "ts_ls" },
+            ensure_installed = { "lua_ls", "ts_ls", "clangd" },
         },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
