@@ -25,6 +25,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
+    backupFileExtension = "backup";
     users = {
       # Import your home-manager configuration
       mable = import ../home-manager/home.nix;
@@ -117,7 +118,8 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.desktopManager.gnome.enable = false;
 
   # Prevent sleep
   systemd.targets.sleep.enable = false;
@@ -133,21 +135,37 @@
   
   
 
-  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = false;
   services.displayManager.autoLogin.user = "mable";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  # systemd.services."getty@tty1".enable = false;
+  # systemd.services."autovt@tty1".enable = false;
   
   environment.systemPackages = with pkgs; [
     # Core
     firefox
 
+    # Hyprland
+    alacritty
+    hyprshot
+    hyprpicker
+    hyprlock
+    hypridle
+    hyprpolkitagent
+    hyprland-qtutils
+    wofi
+    waybar
+    mako
+    swaybg
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
+    seatd
+
     # Dev
     fish
     git
-    fzf
+    ripgrep
     sesh
     starship
     lazygit
@@ -185,8 +203,19 @@
     # ticktick
   ];
 
-  programs.steam = {
+  programs.bash = {
+    interactiveShellInit = ''
+      fish
+    '';
+  };
+
+  programs.hyprland = {
     enable = true;
+    xwayland.enable = true;
+  };
+
+  programs.steam = {
+    enable = false;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
@@ -208,6 +237,20 @@
   fonts.packages = with pkgs; [
     jetbrains-mono
   ];
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal
+    ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal
+    ];
+  };
 
   networking.hostName = "nixos";
 
