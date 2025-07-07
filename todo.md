@@ -4,5 +4,6 @@
 ## Nix
 
 - Hyprland
-- Wezterm icons
-- Fish / TMUX
+- Re-organise files
+- Fix: Transparency on wofi
+- Remove unused apps

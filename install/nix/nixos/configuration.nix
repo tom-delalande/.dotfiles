@@ -148,7 +148,6 @@
     chromium
 
     # Hyprland
-    alacritty
     hyprshot
     hyprpicker
     hyprlock
@@ -171,10 +170,16 @@
     sesh
     starship
     lazygit
+    lazydocker
     neovim
     tmux
     wezterm
     zoxide
+
+    # Core - 2
+    spotify
+    bitwarden-desktop
+    obsidian
 
     # # Dev - Work
     # gradle
@@ -187,7 +192,6 @@
     # figma-linux
     # inkscape
     # krita
-    # obsidian
     # reaper
     #
     # # Play
