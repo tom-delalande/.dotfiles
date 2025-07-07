@@ -145,7 +145,8 @@
   environment.systemPackages = with pkgs; [
     # Core
     firefox
-    chromium
+    neovim
+    git
 
     # Hyprland
     hyprshot
@@ -162,16 +163,16 @@
     xdg-desktop-portal-gtk
     seatd
     nautilus
+    btop
+    clipse
 
     # Dev
     fish
-    git
     ripgrep
     sesh
     starship
     lazygit
     lazydocker
-    neovim
     tmux
     wezterm
     zoxide
