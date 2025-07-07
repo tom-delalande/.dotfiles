@@ -122,10 +122,10 @@
   services.xserver.desktopManager.gnome.enable = false;
 
   # Prevent sleep
-  systemd.targets.sleep.enable = false;
-  systemd.targets.suspend.enable = false;
-  systemd.targets.hibernate.enable = false;
-  systemd.targets.hybrid-sleep.enable = false;
+  # systemd.targets.sleep.enable = false;
+  # systemd.targets.suspend.enable = false;
+  # systemd.targets.hibernate.enable = false;
+  # systemd.targets.hybrid-sleep.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -145,6 +145,7 @@
   environment.systemPackages = with pkgs; [
     # Core
     firefox
+    chromium
 
     # Hyprland
     alacritty
@@ -161,6 +162,7 @@
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
     seatd
+    nautilus
 
     # Dev
     fish
@@ -235,7 +237,7 @@
   };
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
+    nerd-fonts.jetbrains-mono
   ];
 
   xdg.portal = {
