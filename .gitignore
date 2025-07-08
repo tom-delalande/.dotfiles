@@ -5,3 +5,11 @@ config/tmux/plugins
 config/lazygit/state.yml
 config/fish/fish_variables
 install/ansible/roles
+config/aerospace/aerospace
+config/fish/fish
+config/git/git
+config/lazygit/lazygit
+config/nvim/nvim
+config/tmux/tmux
+config/wezterm/wezterm
+config/lazygit/state.yml
