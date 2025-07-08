@@ -6,8 +6,6 @@ brew "git"
 brew "gradle"
 brew "httpie"
 brew "jesseduffield/lazygit/lazygit"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai", args: ["HEAD"]
 brew "neovim"
 brew "node"
 brew "openjdk@11"
